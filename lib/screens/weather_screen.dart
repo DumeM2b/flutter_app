@@ -87,26 +87,57 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
                             child: TextField(
                               controller: _cityController,
                               decoration: InputDecoration(
-                                hintText: 'Enter a City',
-                                hintStyle: TextStyle(color: Colors.grey[300]),
-                                filled: true, // Remplissage activé pour le fond
-                                fillColor: AppColors.lightBlack, // Couleur de fond (personnalisez selon vos préférences)
+                                prefixIcon: Icon(
+                                  Icons.search, // Icône de recherche au début
+                                  color: Colors.white, // Couleur de l'icône
+                                ),
+                                hintText: 'Research', // Texte d'invite
+                                hintStyle: TextStyle(color: Colors.white),
+                                filled: true, // Activer le remplissage pour le fond
+                                fillColor: AppColors.lightBlack, // Couleur de fond personnalisée lightdark
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide.none,
-                                  // Supprime la bordure
+                                  borderSide: BorderSide(
+                                    color: AppColors.darkBlack, // Couleur du contour noir
+                                  ),
                                 ),
                                 contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                               ),
                             ),
                           ),
                           const SizedBox(width: 20),
-                          ElevatedButton(
-                            onPressed: _searchCityWeather,
-                            child: const Text('Rechercher'),
-                            style: ElevatedButton.styleFrom(
-                                foregroundColor: Colors.white, backgroundColor: Colors.grey[700], // Définir le fond du bouton
-                              )
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12.0),
+                              gradient: LinearGradient(
+                                begin: Alignment.bottomRight,
+                                end: Alignment.topLeft,
+                                colors: [
+                                  AppColors.primaryColor,
+                                  AppColors.secondPrimaryColor,
+                                ],
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(2.0), // Espace pour le contour en gradient
+                              child: ElevatedButton(
+                                onPressed: _searchCityWeather,
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColors.darkBlack, // Fond du bouton
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0), // Réduit pour respecter l'espace du contour
+                                  ),
+                                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                                  elevation: 0, // Désactiver l'ombre pour un look plus net
+                                ),
+                                child: const Text(
+                                  'Rechercher',
+                                  style: TextStyle(
+                                    color: Colors.white, // Texte blanc
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
                         ],
                       ),

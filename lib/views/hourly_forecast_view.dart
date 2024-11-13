@@ -48,6 +48,7 @@ class _HourlyForecastViewState extends ConsumerState<HourlyForecastView> {
 
         return Card(
           elevation: 10,
+          margin: EdgeInsets.zero,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),

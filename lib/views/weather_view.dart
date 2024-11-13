@@ -19,59 +19,60 @@ class WeatherScreenView extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(width: double.infinity),
-            // Carte contenant les informations météo
-            Card( // Utilisation d'un widget Card pour l'élévation
-              elevation: 10, // Ajout d'une élévation de 10
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16), // Arrondi de la carte
-              ),
-              child: Container(
-                height: 508, // Fixez la hauteur de la carte à 500 pixels
-                padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0),
-                decoration: BoxDecoration(
-                  color: AppColors.lightBlack, // Couleur de fond de la carte
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // Nom de la ville
-                    Text(
-                      weather.name,
-                      style: TextStyles.h1,
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 10),
-                    // Date actuelle
-                    Text(
-                      DateTime.now().dateTime,
-                      style: TextStyles.subtitleText,
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 30),
-
-                    // Image de la météo
-                    SizedBox(
-                      height: 200,
-                      child: Image.asset(
-                        'assets/icons/${weather.weather[0].icon.replaceAll('n', 'd')}.png',
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    // Description de la météo
-                    Text(
-                      weather.weather[0].description.capitalize,
-                      style: TextStyles.h2,
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 20),
-
-                    // Informations sur la température, l'humidité et le vent, centrées
-                    WeatherInfo(
-                      weather: weather,
-                    ),
+            // Container contenant les informations météo avec un fond en gradient
+            Container(
+              height: 508, // Fixez la hauteur de la carte
+              padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.bottomRight,
+                  end: Alignment.topLeft,
+                  colors: [
+                    AppColors.primaryColor,
+                    AppColors.secondPrimaryColor,
                   ],
                 ),
+                borderRadius: BorderRadius.circular(16), // Arrondi de la carte
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Nom de la ville
+                  Text(
+                    weather.name,
+                    style: TextStyles.h1,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 10),
+                  // Date actuelle
+                  Text(
+                    DateTime.now().dateTime,
+                    style: TextStyles.subtitleText,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 30),
+
+                  // Image de la météo
+                  SizedBox(
+                    height: 200,
+                    child: Image.asset(
+                      'assets/icons/${weather.weather[0].icon.replaceAll('n', 'd')}.png',
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  // Description de la météo
+                  Text(
+                    weather.weather[0].description.capitalize,
+                    style: TextStyles.h2,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 20),
+
+                  // Informations sur la température, l'humidité et le vent
+                  WeatherInfo(
+                    weather: weather,
+                  ),
+                ],
               ),
             ),
           ],
