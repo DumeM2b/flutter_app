@@ -56,7 +56,7 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
     final weatherData = ref.watch(currentWeatherProvider);
 
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: AppColors.darkBlack,
       body: weatherData.when(
         data: (weather) {
           return SingleChildScrollView(
@@ -66,8 +66,6 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 20),
-
-                  // Row pour le titre "Meteo Dashboard", le champ texte et le bouton de recherche
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -92,7 +90,7 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
                                 hintText: 'Enter a City',
                                 hintStyle: TextStyle(color: Colors.grey[300]),
                                 filled: true, // Remplissage activé pour le fond
-                                fillColor: Colors.grey[700], // Couleur de fond (personnalisez selon vos préférences)
+                                fillColor: AppColors.lightBlack, // Couleur de fond (personnalisez selon vos préférences)
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
                                   borderSide: BorderSide.none,

@@ -29,7 +29,7 @@ class WeatherScreenView extends ConsumerWidget {
                 height: 508, // Fixez la hauteur de la carte à 500 pixels
                 padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0),
                 decoration: BoxDecoration(
-                  color: Colors.grey[700], // Couleur de fond de la carte
+                  color: AppColors.lightBlack, // Couleur de fond de la carte
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Column(

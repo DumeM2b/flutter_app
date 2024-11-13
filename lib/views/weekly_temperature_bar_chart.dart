@@ -69,7 +69,7 @@ class WeeklyTemperatureBarChart extends ConsumerWidget {
           child: Container(
             height: 280, // Fixez la hauteur de la carte à 280
             decoration: BoxDecoration(
-              color: Colors.grey[700],
+              color: AppColors.lightBlack,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Padding(

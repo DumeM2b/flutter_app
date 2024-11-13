@@ -25,7 +25,7 @@ class WeeklyForecastView extends ConsumerWidget {
             height: 200, // Hauteur fixe pour la carte
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Colors.grey[700],
+              color: AppColors.lightBlack,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
@@ -98,7 +98,7 @@ class WeeklyWeatherTile extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: Colors.grey[600],
+        color: AppColors.darkBlack,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

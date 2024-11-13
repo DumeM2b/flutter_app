@@ -14,7 +14,7 @@ class HourlyForecastView extends ConsumerStatefulWidget {
 }
 
 class _HourlyForecastViewState extends ConsumerState<HourlyForecastView> {
-  String selectedMetric = 'Temperature'; // Métrique sélectionnée initialement
+  String selectedMetric = 'Temperature';
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +22,11 @@ class _HourlyForecastViewState extends ConsumerState<HourlyForecastView> {
 
     return hourlyWeatherData.when(
       data: (HourlyWeather hourlyWeather) {
-        // Filtrage pour obtenir les prévisions des prochaines 24 heures
         List<dynamic> next24Hours = hourlyWeather.list.where((weather) {
           final dateTime = DateTime.fromMillisecondsSinceEpoch(weather.dt * 1000);
           return dateTime.isAfter(DateTime.now()) && dateTime.isBefore(DateTime.now().add(const Duration(hours: 24)));
         }).toList();
 
-        // Création des points pour le graphique selon la métrique sélectionnée
         List<FlSpot> spots = next24Hours.asMap().entries.map((entry) {
           int index = entry.key;
           var weather = entry.value;
@@ -38,28 +36,27 @@ class _HourlyForecastViewState extends ConsumerState<HourlyForecastView> {
             value = weather.main.temp.toDouble();
           } else if (selectedMetric == 'Wind') {
             value = weather.wind.speed.toDouble();
-          } else { // Humidity
+          } else {
             value = weather.main.humidity.toDouble();
           }
 
           return FlSpot(index.toDouble(), value);
         }).toList();
 
-        // Déterminer les limites des axes
-        double minY = spots.map((e) => e.y).reduce((a, b) => a < b ? a : b) - 2; // Réduit de 2 pour l'espace
-        double maxY = spots.map((e) => e.y).reduce((a, b) => a > b ? a : b) + 2; // Augmente de 2 pour l'espace
+        double minY = spots.map((e) => e.y).reduce((a, b) => a < b ? a : b) - 2;
+        double maxY = spots.map((e) => e.y).reduce((a, b) => a > b ? a : b) + 2;
 
-        return Card( // Utilisation d'un widget Card pour l'élévation
-          elevation: 10, // Ajout d'une élévation de 10
+        return Card(
+          elevation: 10,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16), // Arrondi de la carte
+            borderRadius: BorderRadius.circular(16),
           ),
           child: Container(
-            height: 280, // Fixez la hauteur de la carte à 300 pixels
+            height: 280,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16),
               child: Container(
-                color: Colors.grey[700],
+                color: AppColors.lightBlack,
                 child: Column(
                   children: [
                     Padding(
@@ -70,51 +67,95 @@ class _HourlyForecastViewState extends ConsumerState<HourlyForecastView> {
                           Text('Overview For The Next 24h', style: TextStyles.h2),
                           Row(
                             children: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  setState(() {
-                                    selectedMetric = 'Temperature'; // Changement de la métrique
-                                  });
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  foregroundColor: Colors.white, backgroundColor: Colors.grey[600], // Définir le fond du bouton
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  gradient: LinearGradient(
+                                    begin: Alignment.bottomRight,
+                                    end: Alignment.topLeft,
+                                    colors: [
+                                      AppColors.primaryColor,
+                                      AppColors.secondPrimaryColor,
+                                    ],
+                                  ),
                                 ),
-                                child: const Text('Temperature'),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      selectedMetric = 'Temperature';
+                                    });
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    foregroundColor: Colors.white,
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent,
+                                  ),
+                                  child: const Text('Temperature'),
+                                ),
                               ),
                               const SizedBox(width: 8),
-                              ElevatedButton(
-                                onPressed: () {
-                                  setState(() {
-                                    selectedMetric = 'Wind'; // Changement de la métrique
-                                  });
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  foregroundColor: Colors.white, backgroundColor: Colors.grey[600], // Définir le fond du bouton
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  gradient: LinearGradient(
+                                    begin: Alignment.bottomRight,
+                                    end: Alignment.topLeft,
+                                    colors: [
+                                      AppColors.primaryColor,
+                                      AppColors.secondPrimaryColor,
+                                    ],
+                                  ),
                                 ),
-                                child: const Text('Wind'),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      selectedMetric = 'Wind';
+                                    });
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    foregroundColor: Colors.white,
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent,
+                                  ),
+                                  child: const Text('Wind'),
+                                ),
                               ),
                               const SizedBox(width: 8),
-                              ElevatedButton(
-                                onPressed: () {
-                                  setState(() {
-                                    selectedMetric = 'Humidity'; // Changement de la métrique
-                                  });
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  foregroundColor: Colors.white, backgroundColor: Colors.grey[600], // Définir le fond du bouton
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  gradient: LinearGradient(
+                                    begin: Alignment.bottomRight,
+                                    end: Alignment.topLeft,
+                                    colors: [
+                                      AppColors.primaryColor,
+                                      AppColors.secondPrimaryColor,
+                                    ],
+                                  ),
                                 ),
-                                child: const Text('Humidity'),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      selectedMetric = 'Humidity';
+                                    });
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    foregroundColor: Colors.white,
+                                    backgroundColor: Colors.transparent,
+                                    shadowColor: Colors.transparent,
+                                  ),
+                                  child: const Text('Humidity'),
+                                ),
                               ),
                             ],
                           ),
                         ],
                       ),
                     ),
-                    // Ajout de padding en bas et sur les côtés du graphique
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0), // Padding supplémentaire
+                      padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 20.0),
                       child: SizedBox(
-                        height: 165, // Gardez la hauteur de 200 pour le graphique
+                        height: 165,
                         child: LineChart(
                           LineChartData(
                             gridData: FlGridData(show: false),
@@ -159,7 +200,7 @@ class _HourlyForecastViewState extends ConsumerState<HourlyForecastView> {
                                 spots: spots,
                                 isCurved: true,
                                 gradient: LinearGradient(
-                                  colors: [AppColors.lightBlue, AppColors.lightBlue],
+                                  colors: [AppColors.royalFuchsia, AppColors.primaryColor],
                                   begin: Alignment.centerLeft,
                                   end: Alignment.centerRight,
                                 ),
@@ -167,7 +208,7 @@ class _HourlyForecastViewState extends ConsumerState<HourlyForecastView> {
                                 belowBarData: BarAreaData(
                                   show: true,
                                   gradient: LinearGradient(
-                                    colors: [AppColors.lightBlue.withOpacity(0.3), AppColors.lightBlue.withOpacity(0.0)],
+                                    colors: [AppColors.royalFuchsia.withOpacity(0.3), AppColors.primaryColor.withOpacity(0.0)],
                                     begin: Alignment.topCenter,
                                     end: Alignment.bottomCenter,
                                   ),
@@ -191,7 +232,7 @@ class _HourlyForecastViewState extends ConsumerState<HourlyForecastView> {
                                       value = '${weather.main.temp}°C';
                                     } else if (selectedMetric == 'Wind') {
                                       value = '${weather.wind.speed} m/s';
-                                    } else { // Humidity
+                                    } else {
                                       value = '${weather.main.humidity}%';
                                     }
 

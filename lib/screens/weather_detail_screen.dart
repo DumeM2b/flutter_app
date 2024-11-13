@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:weather_app_tutorial/constants/app_colors.dart';
 import 'package:weather_app_tutorial/extensions/datetime.dart';
 import 'package:weather_app_tutorial/extensions/strings.dart';
 import 'package:weather_app_tutorial/models/weather.dart';
@@ -27,7 +28,7 @@ class WeatherDetailScreen extends ConsumerWidget {
         children: [
           // Remplacer GradientContainer par un Container avec couleur de fond gris
           Container(
-            color: Colors.grey[700], // Couleur de fond gris
+            color: AppColors.darkBlack, // Couleur de fond gris
             child: weatherData.when(
               data: (weather) {
                 return Column(

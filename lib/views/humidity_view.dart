@@ -27,7 +27,7 @@ class HumidityView extends ConsumerWidget {
             height: 200, // Fixez la hauteur de la carte ici
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.grey[700],
+              color: AppColors.lightBlack,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(

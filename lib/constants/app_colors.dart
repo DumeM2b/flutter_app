@@ -14,4 +14,17 @@ class AppColors {
   //! Blacks
   static const Color black = Color(0xFF000000);
   static const Color secondaryBlack = Color(0xFF060620);
+
+
+   static Color primaryColor = Color(0xffF9443A);
+  static Color secondPrimaryColor = Color(0xffFA5F31);
+  static Color darkBlack = Color(0xff0A0A0A);
+  static Color lightBlack = Color(0xff121212);
+  static Color darkGrey = Colors.grey;
+  static Color blue = Color(0xff1458E1);
+  static Color royalFuchsia = Color(0xffC72396);
+  static Color promiscuousPink = Color(0xffB111F1);
+  static Color darkYellow = Color(0xffCB915D);
+  static Color chocolateMelange = Color(0xff311302);
+
 }

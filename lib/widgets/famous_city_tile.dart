@@ -19,7 +19,7 @@ class FamousCityTile extends ConsumerWidget {
     return weatherData.when(
       data: (weather) {
         return Material(
-          color: Colors.grey[700],
+          color: AppColors.lightBlack,
           elevation:  10 ,
           borderRadius: BorderRadius.circular(16.0),
           child: Container(
