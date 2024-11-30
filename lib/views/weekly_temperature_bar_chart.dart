@@ -30,8 +30,8 @@ class WeeklyTemperatureBarChart extends ConsumerWidget {
                 toY: minTemps[index],
                 gradient: LinearGradient(
                   colors: [
-                    AppColors.lightBlue.withOpacity(0.3),
-                    AppColors.lightBlue.withOpacity(1),
+                    AppColors.royalFuchsia.withOpacity(0.3),
+                    AppColors.royalFuchsia.withOpacity(1),
                   ],
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
@@ -43,8 +43,8 @@ class WeeklyTemperatureBarChart extends ConsumerWidget {
                 toY: maxTemps[index],
                 gradient: LinearGradient(
                   colors: [
-                    Colors.orange.withOpacity(0.3),
-                    Colors.orange.withOpacity(1),
+                    AppColors.secondPrimaryColor.withOpacity(0.3),
+                    AppColors.secondPrimaryColor.withOpacity(1),
                   ],
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,

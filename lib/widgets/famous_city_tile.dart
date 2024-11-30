@@ -47,7 +47,7 @@ class FamousCityTile extends ConsumerWidget {
                             weather.weather[0].description.capitalize,
                             style: TextStyles.subtitleText,
                             overflow: TextOverflow.ellipsis,
-                            maxLines: 2,  // Limite à 2 lignes le texte de description
+                            maxLines: 1,  // Limite à 2 lignes le texte de description
                           ),
                         ],
                       ),

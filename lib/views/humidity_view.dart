@@ -79,7 +79,7 @@ class HumidityIndicator extends CustomPainter {
       ..strokeWidth = 12;
 
     // Couleur pour le fond (100% d'humidité)
-    paint.color = AppColors.lightBlue.withOpacity(0.3);
+    paint.color = AppColors.royalFuchsia.withOpacity(0.3);
     canvas.drawArc(
       Rect.fromCircle(center: Offset(radius, radius), radius: radius),
       3.14, // Début à 180 degrés pour retourner le demi-cercle
@@ -89,7 +89,7 @@ class HumidityIndicator extends CustomPainter {
     );
 
     // Couleur pour l'humidité actuelle
-    paint.color = AppColors.lightBlue;
+    paint.color = AppColors.royalFuchsia;
     canvas.drawArc(
       Rect.fromCircle(center: Offset(radius, radius), radius: radius),
       3.14, // Début à 180 degrés

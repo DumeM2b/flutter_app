@@ -7,6 +7,7 @@ import 'package:weather_app_tutorial/providers/hourly_weather_provider.dart';
 import 'package:weather_app_tutorial/providers/weekly_weather_provider.dart';
 import 'package:weather_app_tutorial/views/hourly_forecast_view.dart';
 import 'package:weather_app_tutorial/views/humidity_view.dart';
+import 'package:weather_app_tutorial/views/sunrise_view.dart';
 import 'package:weather_app_tutorial/views/weather_view.dart';
 import 'package:weather_app_tutorial/views/weekly_forecast_view.dart';
 import 'package:weather_app_tutorial/views/weekly_temperature_bar_chart.dart';
@@ -169,7 +170,7 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
                           children: [
                             SizedBox(height: 20),
                             HourlyForecastView(), // Prévisions horaires
-                            SizedBox(height: 20),
+                            SizedBox(height: 22),
                             // Humidity et WeeklyForecast côte à côte avec proportions 1/3 et 2/3
                             Row(
                               children: [
@@ -180,12 +181,12 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
                                 SizedBox(width: 20),
                                 Expanded(
                                   flex: 2, // WeeklyForecastView prend 2/3 de l'espace
-                                  child: WeeklyForecastView(),
+                                  child: SunriseSunsetCard(),
                                 ),
                               ],
                             ),
-                            SizedBox(height: 20),
-                            WeeklyTemperatureBarChart(), // Graphique des températures hebdomadaires
+                            SizedBox(height: 16),
+                            WeeklyForecastView(), // Graphique des températures hebdomadaires
                           ],
                         ),
                       ),

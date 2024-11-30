@@ -23,7 +23,7 @@ class SuperscriptText extends StatelessWidget {
           text,
           style: TextStyle(
             color: color,
-            fontSize: 40,
+            fontSize: 25,
             fontWeight: FontWeight.w400,
           ),
           ),

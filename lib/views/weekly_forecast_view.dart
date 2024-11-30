@@ -16,41 +16,56 @@ class WeeklyForecastView extends ConsumerWidget {
 
     return WeeklyForecastData.when(
       data: (weeklyWeather) {
-        return Card( // Utilisation d'un widget Card
-          elevation: 10, // Ajout d'une élévation de 10
+        return Card(
+          elevation: 10,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16), // Arrondi de la carte
+            borderRadius: BorderRadius.circular(16),
           ),
           child: Container(
-            height: 200, // Hauteur fixe pour la carte
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: AppColors.lightBlack,
               borderRadius: BorderRadius.circular(16),
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start, // Pour aligner les éléments à gauche
               children: [
-                const SizedBox(height: 5),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: weeklyWeather.daily.weatherCode.length,
-                    shrinkWrap: true,
-                    physics: const AlwaysScrollableScrollPhysics(), // Activer le défilement
-                    itemBuilder: (context, index) {
-                      final dayOfWeek =
-                          DateTime.parse(weeklyWeather.daily.time[index]).dayOfWeek;
+                const Text(
+                  'Weekly Forecast',
+                  style: TextStyles.h2, // Style pour le sous-titre
+                ),
+                const SizedBox(height: 20), // Espacement avant la liste
+                // Row pour afficher 7 jours
+                Container(
+                  height: 180,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Pour espacer les éléments de manière égale
+                    children: List.generate(7, (index) {
+                      final dayOfWeek = DateTime.parse(weeklyWeather.daily.time[index]).dayOfWeek;
                       final date = weeklyWeather.daily.time[index];
-                      final temp = weeklyWeather.daily.temperature2mMax[index];
+                      final tempMax = weeklyWeather.daily.temperature2mMax[index];
+                      final tempMin = weeklyWeather.daily.temperature2mMin[index];
                       final icon = weeklyWeather.daily.weatherCode[index];
 
-                      return WeeklyWeatherTile(
-                        date: date,
-                        day: dayOfWeek,
-                        temp: temp.toInt(),
-                        icon: getWeatherIcon2(icon),
+                      // Appliquer un fond différent pour le premier élément
+                      Color backgroundColor = index == 0
+                          ? AppColors.primaryColor // Fond spécial pour le premier jour
+                          : AppColors.darkBlack; // Fond par défaut
+
+                      return Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8), // Espacement horizontal
+                          child: WeeklyWeatherTile(
+                            date: date,
+                            day: dayOfWeek,
+                            tempMax: tempMax.toInt(),
+                            tempMin: tempMin.toInt(),
+                            icon: getWeatherIcon2(icon),
+                            backgroundColor: backgroundColor, // Passer la couleur de fond
+                          ),
+                        ),
                       );
-                    },
+                    }),
                   ),
                 ),
               ],
@@ -77,49 +92,77 @@ class WeeklyWeatherTile extends StatelessWidget {
     super.key,
     required this.day,
     required this.date,
-    required this.temp,
+    required this.tempMax,
+    required this.tempMin,
     required this.icon,
+    required this.backgroundColor,
   });
 
   final String day;
   final String date;
-  final int temp;
+  final int tempMax;
+  final int tempMin;
   final String icon;
+  final Color backgroundColor; // Nouvelle propriété pour la couleur de fond
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 16,
-        vertical: 10, // Réduire un peu pour s'adapter à la carte
+        vertical: 10,
       ),
       margin: const EdgeInsets.symmetric(
-        vertical: 8, // Réduire l'espacement entre les items
+        vertical: 8,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: AppColors.darkBlack,
+        color: backgroundColor, // Utilisation de la couleur passée en paramètre
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column( // Changement vers une disposition verticale
+        mainAxisSize: MainAxisSize.min, // Adapte la taille à son contenu
+        crossAxisAlignment: CrossAxisAlignment.center, // Centrage horizontal
         children: [
-          Column(
+          // Jour
+          Text(
+            day,
+            style: TextStyles.h3,
+          ),
+          const SizedBox(height: 5),
+          // Date
+          Text(
+            date,
+            style: TextStyles.subtitleText,
+          ),
+          const SizedBox(height: 10),
+          // Températures combinées
+          Row(
+            mainAxisSize: MainAxisSize.min, // Adapte la taille au contenu
             children: [
-              Text(day, style: TextStyles.h3),
-              const SizedBox(height: 5),
+              SuperscriptText(
+                text: tempMin.toString(),
+                superScript: "°C",
+                color: AppColors.white,
+                superscriptColor: AppColors.grey,
+              ),
               Text(
-                date,
-                style: TextStyles.subtitleText,
-              )
+                " - ",
+                style: TextStyles.h3, // Style aligné avec les températures
+              ),
+              SuperscriptText(
+                text: tempMax.toString(),
+                superScript: "°C",
+                color: AppColors.white,
+                superscriptColor: AppColors.grey,
+              ),
             ],
           ),
-          SuperscriptText(
-            text: temp.toString(),
-            superScript: "°C",
-            color: AppColors.white,
-            superscriptColor: AppColors.grey,
+          const SizedBox(height: 10),
+          // Icône météo
+          Image.asset(
+            icon,
+            width: 40,
           ),
-          Image.asset(icon, width: 40), // Réduire la taille de l'icône
         ],
       ),
     );
